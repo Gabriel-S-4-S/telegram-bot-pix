@@ -27,11 +27,18 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     mensagem = f"""
 💎 ACESSO VIP 💎
 
-1️⃣ PIX: {PIX}
-2️⃣ Envie o comprovante aqui
-3️⃣ Aguarde aprovação
+Para entrar no grupo exclusivo:
 
-Link: {LINK_GRUPO}
+1️⃣ Faça o pagamento via PIX:
+🔑 {PIX}
+
+2️⃣ Envie o comprovante aqui no chat 📩
+
+3️⃣ Aguarde aprovação do administrador
+
+⚠️ Sem comprovante, o acesso NÃO será liberado.
+
+🔥 Após aprovação, você receberá o link do grupo.
 """
     await update.message.reply_text(mensagem)
 
