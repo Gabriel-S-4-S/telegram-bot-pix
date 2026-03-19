@@ -26,8 +26,8 @@ def keep_alive():
 
 # ===== CONFIG =====
 TOKEN = "8529002340:AAFNgPwyvE2WK3UK8B7zrE2h2rZo7P_x1qw"
-ADMIN_ID = 8768911632
-PIX = "11 96105-0894"
+ADMIN_ID = 8117675695
+PIX = "11944712407"
 LINK_GRUPO = "https://t.me/+NKQd-ePKROBiN2Vh"
 
 # ===== COMANDO /start =====
@@ -63,7 +63,7 @@ async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await query.answer()
 
     if query.data == "copiar_pix":
-        await query.message.reply_text(f"🔑 Chave PIX:\n\n{PIX}")
+        await query.message.reply_text(f"{PIX}")
 
 # ===== RECEBER MENSAGENS =====
 async def receber_mensagem(update: Update, context: ContextTypes.DEFAULT_TYPE):
