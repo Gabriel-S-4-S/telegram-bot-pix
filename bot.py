@@ -1,9 +1,16 @@
 from flask import Flask
 import threading
-from telegram import Update
-from telegram.ext import ApplicationBuilder, CommandHandler, MessageHandler, ContextTypes, filters
+from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
+from telegram.ext import (
+    ApplicationBuilder,
+    CommandHandler,
+    MessageHandler,
+    CallbackQueryHandler,
+    ContextTypes,
+    filters,
+)
 
-# ===== FLASK KEEP ALIVE =====
+# ===== KEEP ALIVE (RENDER + UPTIME ROBOT) =====
 app = Flask("")
 
 @app.route("/")
@@ -17,12 +24,13 @@ def keep_alive():
     t = threading.Thread(target=run)
     t.start()
 
-# ===== BOT TELEGRAM =====
-TOKEN = "8529002340:AAFNgPwyvE2WK3UK8B7zrE2h2rZo7P_x1qw"  # Substitua se quiser gerar novo token
+# ===== CONFIG =====
+TOKEN = "8529002340:AAFNgPwyvE2WK3UK8B7zrE2h2rZo7P_x1qw"
 ADMIN_ID = 8768911632
 PIX = "11 96105-0894"
 LINK_GRUPO = "https://t.me/+NKQd-ePKROBiN2Vh"
 
+# ===== COMANDO /start =====
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     mensagem = f"""
 💎 ACESSO VIP 💎
@@ -40,23 +48,45 @@ Para entrar no grupo exclusivo:
 
 🔥 Após aprovação, você receberá o link do grupo.
 """
-    await update.message.reply_text(mensagem)
 
+    keyboard = [
+        [InlineKeyboardButton("📋 Copiar chave PIX", callback_data="copiar_pix")]
+    ]
+    reply_markup = InlineKeyboardMarkup(keyboard)
+
+    await update.message.reply_text(mensagem)
+    await update.message.reply_text("👇 Clique abaixo para copiar o PIX:", reply_markup=reply_markup)
+
+# ===== BOTÃO =====
+async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    query = update.callback_query
+    await query.answer()
+
+    if query.data == "copiar_pix":
+        await query.message.reply_text(f"🔑 Chave PIX:\n\n{PIX}")
+
+# ===== RECEBER MENSAGENS =====
 async def receber_mensagem(update: Update, context: ContextTypes.DEFAULT_TYPE):
     user = update.effective_user
+
     await update.message.reply_text("📩 Comprovante recebido! Aguarde verificação.")
+
+    # encaminhar pro admin
     await context.bot.forward_message(
         chat_id=ADMIN_ID,
         from_chat_id=update.effective_chat.id,
         message_id=update.message.message_id
     )
+
     print(f"Mensagem de {user.username or user.first_name}")
 
-# ===== INICIAR KEEP ALIVE =====
+# ===== INICIAR =====
 keep_alive()
 
-# ===== INICIAR BOT =====
 app_bot = ApplicationBuilder().token(TOKEN).build()
+
 app_bot.add_handler(CommandHandler("start", start))
+app_bot.add_handler(CallbackQueryHandler(button_handler))
 app_bot.add_handler(MessageHandler(filters.ALL, receber_mensagem))
+
 app_bot.run_polling()
