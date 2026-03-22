@@ -50,7 +50,7 @@ Para entrar no grupo exclusivo:
 
     keyboard = [
         [InlineKeyboardButton("📋 Copiar chave PIX", callback_data="copiar_pix")],
-        [InlineKeyboardButton("🎬 ANIME JÁ POSTADO", callback_data="animes")]
+        [InlineKeyboardButton("🎬 ANIMES JÁ POSTADOS", callback_data="animes")]
     ]
     reply_markup = InlineKeyboardMarkup(keyboard)
 
