@@ -10,7 +10,7 @@ from telegram.ext import (
     filters,
 )
 
-# ===== KEEP ALIVE (RENDER + UPTIME ROBOT) =====
+# ===== KEEP ALIVE =====
 app = Flask("")
 
 @app.route("/")
@@ -28,9 +28,8 @@ def keep_alive():
 TOKEN = "8529002340:AAFNgPwyvE2WK3UK8B7zrE2h2rZo7P_x1qw"
 ADMIN_ID = 8117675695
 PIX = "11944712407"
-LINK_GRUPO = "https://t.me/+NKQd-ePKROBiN2Vh"
 
-# ===== COMANDO /start =====
+# ===== /start =====
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     mensagem = f"""
 💎 ACESSO VIP 💎
@@ -50,20 +49,38 @@ Para entrar no grupo exclusivo:
 """
 
     keyboard = [
-        [InlineKeyboardButton("📋 Copiar chave PIX", callback_data="copiar_pix")]
+        [InlineKeyboardButton("📋 Copiar chave PIX", callback_data="copiar_pix")],
+        [InlineKeyboardButton("🎬 ANIME JÁ POSTADO", callback_data="animes")]
     ]
     reply_markup = InlineKeyboardMarkup(keyboard)
 
     await update.message.reply_text(mensagem)
-    await update.message.reply_text("👇 Clique abaixo para copiar o PIX:", reply_markup=reply_markup)
+    await update.message.reply_text("👇 Escolha uma opção:", reply_markup=reply_markup)
 
-# ===== BOTÃO =====
+# ===== BOTÕES =====
 async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
     query = update.callback_query
     await query.answer()
 
+    # botão copiar pix
     if query.data == "copiar_pix":
-        await query.message.reply_text(f"{PIX}")
+        await query.message.reply_text(f"🔑 Chave PIX:\n\n{PIX}")
+
+    # botão lista de animes
+    elif query.data == "animes":
+        lista = """
+🎬 ANIMES JÁ POSTADOS:
+
+• Vigilantes
+• Lazarus
+• Histórias macabras do Japão
+• Jujutsu Kaisen
+• O Castelo Animado
+• A Viagem de Chihiro
+• Serviço de Entregas da Kiki
+• Boku no Hero
+"""
+        await query.message.reply_text(lista)
 
 # ===== RECEBER MENSAGENS =====
 async def receber_mensagem(update: Update, context: ContextTypes.DEFAULT_TYPE):
