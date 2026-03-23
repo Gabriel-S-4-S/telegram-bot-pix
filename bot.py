@@ -36,7 +36,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 Para entrar no grupo exclusivo:
 
-1️⃣ Faça o pagamento via PIX:
+1️⃣ Faça o pagamento via PIX de 15R$:
 🔑 {PIX}
 
 2️⃣ Envie o comprovante aqui no chat 📩
@@ -46,6 +46,8 @@ Para entrar no grupo exclusivo:
 ⚠️ Sem comprovante, o acesso NÃO será liberado.
 
 🔥 Após aprovação, você receberá o link do grupo.
+
+Qualquer dúvida digite aqui no Chat, logo um atendente irá responde-lo.
 """
 
     keyboard = [
