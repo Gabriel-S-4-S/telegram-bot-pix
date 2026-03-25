@@ -52,7 +52,7 @@ Qualquer dúvida digite aqui no Chat, logo um atendente irá responde-lo.
 
     keyboard = [
         [InlineKeyboardButton("📋 Copiar chave PIX", callback_data="copiar_pix")],
-        [InlineKeyboardButton("🎬 ANIMES JÁ POSTADOS", callback_data="animes")]
+        [InlineKeyboardButton("🎬 ANIMES EM CARTAZ", callback_data="animes")]
     ]
     reply_markup = InlineKeyboardMarkup(keyboard)
 
@@ -71,7 +71,7 @@ async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
     # botão lista de animes
     elif query.data == "animes":
         lista = """
-🎬 ANIMES JÁ POSTADOS:
+🎬 ANIMES EM CARTAZ:
 
 • Vigilantes
 • Lazarus
