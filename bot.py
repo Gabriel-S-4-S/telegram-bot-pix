@@ -81,6 +81,9 @@ async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
 • A Viagem de Chihiro
 • Serviço de Entregas da Kiki
 • Boku no Hero
+• Diário de uma apotecária 
+• Dandadan
+• Spy Family
 """
         await query.message.reply_text(lista)
 
