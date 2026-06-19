@@ -84,6 +84,11 @@ async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
 • Diário de uma apotecária 
 • Dandadan
 • Spy Family
+• Gachiakuta
+• Witch Hat Atelier
+• Solo Leveling
+• Tokyo Revegers
+• Chainsaw MAN
 """
         await query.message.reply_text(lista)
 
